@@ -1,0 +1,24 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Открытие формы товара"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало: каталог администратора", shape=ellipse];
+add [label="Нажата кнопка «Добавить товар»?", shape=diamond];
+new [label="Подготовить пустую форму; ID не отображать", shape=box];
+select [label="Выбран существующий товар", shape=box];
+opened [label="Окно редактирования уже открыто?", shape=diamond];
+warn [label="Показать сообщение: форма уже открыта", shape=box];
+load [label="Загрузить поля товара из БД; ID только для чтения", shape=box];
+form [label="Открыть форму добавления/редактирования", shape=box];
+e [label="Конец", shape=ellipse];
+s -> add [];
+add -> new [label="Да"];
+add -> select [label="Нет"];
+new -> form [];
+select -> opened [];
+opened -> warn [label="Да"];
+opened -> load [label="Нет"];
+warn -> e [];
+load -> form [];
+form -> e [];
+}

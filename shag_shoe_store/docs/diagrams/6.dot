@@ -1,0 +1,31 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Поиск, фильтрация и сортировка"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало: каталог открыт", shape=ellipse];
+change [label="Изменены поиск, фильтр или сортировка", shape=parallelogram];
+get [label="Получить товары из БД", shape=box];
+empty [label="Строка поиска пустая?", shape=diamond];
+all [label="Оставить все товары", shape=box];
+search [label="Найти совпадения по текстовым полям", shape=box];
+supplier [label="Выбрано «Все поставщики»?", shape=diamond];
+noFilter [label="Не применять фильтр поставщика", shape=box];
+filter [label="Отфильтровать по поставщику", shape=box];
+sort [label="Отсортировать по остатку", shape=box];
+update [label="Обновить список товаров", shape=box];
+wait [label="Ожидать изменения параметров", shape=box];
+s -> change [];
+change -> get [];
+get -> empty [];
+empty -> all [label="Да"];
+empty -> search [label="Нет"];
+all -> supplier [];
+search -> supplier [];
+supplier -> noFilter [label="Да"];
+supplier -> filter [label="Нет"];
+noFilter -> sort [];
+filter -> sort [];
+sort -> update [];
+update -> wait [];
+wait -> change [];
+}

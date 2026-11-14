@@ -1,0 +1,22 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Загрузка и замена изображения"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало: выбрать изображение", shape=ellipse];
+size [label="Размер изображения не больше 300×200?", shape=diamond];
+err [label="Показать сообщение: выберите изображение нужного размера", shape=box];
+old [label="Старое фото существует?", shape=diamond];
+delete [label="Удалить старый файл", shape=box];
+save [label="Сохранить новый файл в папку приложения", shape=box];
+path [label="Сохранить путь к изображению в БД", shape=box];
+e [label="Конец", shape=ellipse];
+s -> size [];
+size -> err [label="Нет"];
+size -> old [label="Да"];
+err -> s [label="Выбрать другое"];
+old -> delete [label="Да"];
+old -> save [label="Нет"];
+delete -> save [];
+save -> path [];
+path -> e [];
+}

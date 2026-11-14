@@ -1,0 +1,22 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Обработка сообщений и исключительных ситуаций"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало: произошло событие", shape=ellipse];
+type [label="Определить тип события", shape=diamond];
+error [label="Ошибка: показать причину и способ исправления", shape=box];
+warning [label="Предупреждение: показать последствия", shape=box];
+confirm [label="Запросить подтверждение пользователя", shape=diamond];
+info [label="Информация: показать результат операции", shape=box];
+return [label="Вернуться к форме или каталогу", shape=box];
+e [label="Конец", shape=ellipse];
+s -> type [];
+type -> error [label="Ошибка"];
+type -> warning [label="Предупреждение"];
+type -> info [label="Информация"];
+error -> return [];
+warning -> confirm [];
+confirm -> return [label="Подтверждено / отменено"];
+info -> return [];
+return -> e [];
+}

@@ -1,0 +1,28 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Проверка и сохранение товара"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало: форма заполнена", shape=ellipse];
+validate [label="Проверить обязательные поля, цену и остаток", shape=box];
+valid [label="Значения корректны?", shape=diamond];
+err [label="Показать ошибку и подсказку", shape=box];
+new [label="Новый товар?", shape=diamond];
+id [label="Вычислить следующий ID", shape=box];
+insert [label="Добавить запись в БД", shape=box];
+update [label="Обновить запись в БД", shape=box];
+refresh [label="Обновить каталог", shape=box];
+success [label="Показать сообщение об успехе", shape=box];
+e [label="Конец", shape=ellipse];
+s -> validate [];
+validate -> valid [];
+valid -> err [label="Нет"];
+valid -> new [label="Да"];
+err -> s [label="Вернуться к форме"];
+new -> id [label="Да"];
+new -> update [label="Нет"];
+id -> insert [];
+insert -> refresh [];
+update -> refresh [];
+refresh -> success [];
+success -> e [];
+}

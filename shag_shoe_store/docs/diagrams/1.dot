@@ -1,0 +1,24 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Импорт исходных данных"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало", shape=ellipse];
+f [label="Получить файлы import", shape=box];
+v [label="Проверить кодировку, обязательные поля и связи", shape=box];
+q [label="Данные корректны?", shape=diamond];
+load [label="Загрузить данные в БД", shape=box];
+check [label="Проверить результат импорта", shape=box];
+ok [label="Импорт успешен?", shape=diamond];
+err [label="Показать и записать ошибку", shape=box];
+e [label="Конец", shape=ellipse];
+s -> f [];
+f -> v [];
+v -> q [];
+q -> load [label="Да"];
+q -> err [label="Нет"];
+load -> check [];
+check -> ok [];
+ok -> e [label="Да"];
+ok -> err [label="Нет"];
+err -> v [label="Повторить проверку"];
+}

@@ -1,0 +1,24 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad="0.28", nodesep="0.28", ranksep="0.42", splines=ortho, labelloc="t", labeljust="c", fontsize=18, fontname="Arial", label="Удаление товара"];
+node [fontname="Arial", fontsize=10, color="#222222", fontcolor="#111111", penwidth=1.2, margin="0.13,0.09", style="filled", fillcolor="white"];
+edge [fontname="Arial", fontsize=9, color="#222222", fontcolor="#111111", penwidth=1.1, arrowsize=0.7];
+s [label="Начало: товар выбран", shape=ellipse];
+click [label="Нажать «Удалить»", shape=box];
+confirm [label="Удаление подтверждено?", shape=diamond];
+check [label="Проверить наличие товара в заказах", shape=box];
+inorder [label="Товар присутствует в заказе?", shape=diamond];
+deny [label="Показать сообщение: удаление запрещено", shape=box];
+delete [label="Удалить товар из БД", shape=box];
+refresh [label="Обновить каталог", shape=box];
+e [label="Конец", shape=ellipse];
+s -> click [];
+click -> confirm [];
+confirm -> e [label="Нет"];
+confirm -> check [label="Да"];
+check -> inorder [];
+inorder -> deny [label="Да"];
+inorder -> delete [label="Нет"];
+deny -> e [];
+delete -> refresh [];
+refresh -> e [];
+}
